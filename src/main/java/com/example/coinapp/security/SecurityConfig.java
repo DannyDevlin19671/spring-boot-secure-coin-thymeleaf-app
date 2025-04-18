@@ -3,6 +3,7 @@ package com.example.coinapp.security;
 import com.example.coinapp.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -62,6 +63,7 @@ public class SecurityConfig {
      * @throws Exception if an error occurs during configuration
      */
     @Bean
+    @Profile("!test")
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .headers(headers -> headers
@@ -91,5 +93,42 @@ public class SecurityConfig {
                 );
 
         return http.build();
+    }
+
+// ✅ CSRF-disabled config for testing
+/**
+ * Configures the SecurityFilterChain bean for the "test" profile.
+ * This configuration disables CSRF protection and defines security rules
+ * for HTTP requests during testing.
+ *
+ * @param http the HttpSecurity object to configure security settings
+ * @return the configured SecurityFilterChain
+ * @throws Exception if an error occurs during configuration
+ */
+@Bean
+@Profile("test")
+public SecurityFilterChain testFilterChain(HttpSecurity http) throws Exception {
+    http
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers("/", "/home", "/login", "/css/**", "/js/**").permitAll()
+                    .requestMatchers("/coins/**").authenticated()
+                    .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/coins", true) // 👈 This was missing
+                    .permitAll()
+            )
+            .logout(logout -> logout
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/logout-success")
+                    .invalidateHttpSession(true)
+                    .clearAuthentication(true)
+                    .deleteCookies("JSESSIONID")
+                    .permitAll()
+            );
+
+    return http.build();
     }
 }

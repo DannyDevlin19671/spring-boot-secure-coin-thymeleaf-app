@@ -108,7 +108,7 @@ public class CoinController {
      */
     @GetMapping("/coins/{id}")
     public String viewCoinDetails(@PathVariable Long id, Model model) {
-        Coin coin = coinRepository.findById(id).orElseThrow(() -> new RuntimeException("Coin not found"));
+        Coin coin = coinRepository.findById(id).orElseThrow(() -> new CoinNotFoundException(id));
         model.addAttribute("coin", coin);
         return "coins/coin-details";
     }

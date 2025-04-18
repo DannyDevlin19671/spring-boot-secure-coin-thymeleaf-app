@@ -36,13 +36,8 @@ public class HomeController {
         return "login";
     }
 
-    /**
-     * Handles the "/logout" URL and returns the view name for the logout page.
-     *
-     * @return the "/logout" view name
-     */
-    @GetMapping("/logout")
-    public String logout() {
-        return "/logout"; // redirect to login page with logout message
+    @GetMapping("/logout-success")
+    public String logoutSuccess() {
+        return "logout-success"; // redirect to login page with logout message
     }
 }

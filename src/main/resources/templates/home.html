@@ -2,9 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h1>Welcome to the Coin App</h1>
-    <p><a href="/login">Login</a> to manage coins.</p>
+
+<header class="navbar">
+    <a href="/login" class="btn-orange">Login</a>
+</header>
+
+<main class="container">
+    <h2>Welcome to the Coin App</h2>
+    <p style="text-align:center;">
+        This app helps you manage your coin collection.
+    </p>
+    <div style="text-align:center; margin-top: 2rem;">
+        <a class="btn-orange" href="/login">👉 Click here to login</a>
+    </div>
+</main>
+
+<footer style="text-align:center; margin-top: 3rem; padding: 1rem; border-top: 1px solid #ddd;">
+    <p>&copy; 2025 Coin App</p>
+</footer>
+
 </body>
 </html>
