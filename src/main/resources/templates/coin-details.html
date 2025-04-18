@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Coin Details</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+
+<!-- Include navbar -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="coin-details">
+    <h2>Coin Details</h2>
+
+    <p><strong>Name:</strong> <span th:text="${coin.name}"></span></p>
+    <p><strong>Description:</strong> <span th:text="${coin.description}"></span></p>
+    <p><strong>Metal:</strong> <span th:text="${coin.metal}"></span></p>
+    <p><strong>Year:</strong> <span th:text="${coin.coinYear}"></span></p>
+    <p><strong>Weight:</strong> <span th:text="${coin.weight}">g</span></p>
+    <p><strong>Fineness:</strong> <span th:text="${coin.fineness}"></span></p>
+    <p><strong>Price:</strong> £<span th:text="${coin.price}"></span></p>
+    <p><strong>Mint:</strong> <span th:text="${coin.mint.country}"></span></p>
+</div>
+
+</body>
+</html>

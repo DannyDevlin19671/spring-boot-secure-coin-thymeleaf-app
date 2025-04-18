@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Coin List</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<h2>All Coins</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Year</th>
+        <th>Metal</th>
+        <th>Weight</th>
+        <th>Price</th>
+        <th>Fineness</th>
+        <th>Mint</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="coin : ${coins}">
+        <td th:text="${coin.name}">Name</td>
+        <td th:text="${coin.description}">Description</td>
+        <td th:text="${coin.coinYear}">Year</td>
+        <td th:text="${coin.metal}">Metal</td>
+        <td th:text="${coin.weight}">Weight</td>
+        <td th:text="${coin.price}">Price</td>
+        <td th:text="${coin.fineness}">Fineness</td>
+        <td th:text="${coin.mint.country}">Mint</td>
+        <td>
+            <a th:href="@{'/coins/details/' + ${coin.id}}">Details</a> |
+            <a th:href="@{'/coins/edit/' + ${coin.id}}">Edit</a> |
+            <a th:href="@{'/coins/delete/' + ${coin.id}}"
+               onclick="return confirm('Are you sure you want to delete this coin?');">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

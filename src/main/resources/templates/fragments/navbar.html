@@ -1,0 +1,10 @@
+<!-- Navbar fragment definition -->
+<div th:fragment="navbar">
+    <nav class="navbar">
+        <a th:href="@{/coins}">Coin List</a>
+        <a th:href="@{/coins/new}">Add Coin</a>
+        <form th:action="@{/logout}" method="post" style="display: inline; margin: 0; padding: 0;">
+            <button type="submit" class="nav-link-logout">Logout</button>
+        </form>
+    </nav>
+</div>

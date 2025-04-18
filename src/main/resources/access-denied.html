@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Access Denied</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="login-container">
+    <h2>Access Denied</h2>
+    <p>You don't have permission to view this page.</p>
+    <p><a th:href="@{/}">Return to Home</a></p>
+</div>
+</body>
+</html>
